@@ -25,5 +25,20 @@ namespace BookStoreWeb.Controllers
             return View();
 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create( Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+            _db.Categories.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+            //if in diff controller
+            //return RedirectToAction("Index", another controller);
+            }
+            return View();
+        }
     }
+    
 }
