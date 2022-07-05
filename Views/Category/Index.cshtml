@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Category List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" asp-controller="Category" class="text-primary"> <i class="bi bi-patch-plus"></i>Create Category</a>
+        </div>
+    </div>
+
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Category Name</th>
+        <th>Description</th>
+        <th>Display order</th>
+        <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td>@obj.Name</td>
+                <td>@obj.Description</td>
+                <td>@obj.DisplayOrder</td>
+                <td>@obj.CreatedDate</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+</div>
+
