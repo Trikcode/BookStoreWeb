@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookStoreWeb.Models
 {
@@ -11,6 +12,8 @@ namespace BookStoreWeb.Models
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string? Description { get; set; }
 
+        [DisplayName("Display Order")]
+        [Range(1,100, ErrorMessage ="Values should btn 1 and 100!!")]
         public int DisplayOrder { get; set; }
 
     }

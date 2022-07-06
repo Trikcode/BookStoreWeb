@@ -5,11 +5,11 @@
 
 
 <div class="container-fluid">
-    @*<div asp-validation-summary="all"></div>*@
-<form method="post">
+    @*<div asp-validation-summary="All"></div>*@
+<form method="post" asp-action="Edit">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Create Category</h2>
+            <h2 class="text-primary">Edit Category</h2>
             <hr/>
         </div>
         <div class="mb-3">
@@ -27,7 +27,7 @@
             <input asp-for="Description" class="form-control"/>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:150px"> Create</button>
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
 
         <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">Back To List</a>
     </div>
