@@ -123,7 +123,117 @@ namespace BookStoreWeb.Controllers
                 //if in diff controller
                 //return RedirectToAction("Index", another controller);
         }
-           
+        public IActionResult Index2()
+        {
+            IEnumerable<Category> objCategory = _db.Categories;
+
+            return View(objCategory);
+        }
+        //get
+        public IActionResult Create2()
+        {
+            return View();
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create2(Category obj)
+
+        {
+            if (obj.Name == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("CustomError", "The display order can't match the Name");
+                //ModelState.AddModelError("Name", "The display order can't match the Name");
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Category Created Successfully";
+                return RedirectToAction("Index");
+                //if in diff controller
+                //return RedirectToAction("Index", another controller);
+            }
+            return View();
+        }
+
+        public IActionResult Edit2(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categoryFromDb = _db.Categories.Find(id);
+            //var categoryToDb = _db.Categories.FirstOrDefault(u=>u.Id==id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+
+            }
+            return View(categoryFromDb);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit2(Category obj)
+
+        {
+            if (obj.Name == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("CustomError", "The display order can't match the Name");
+                //ModelState.AddModelError("Name", "The display order can't match the Name");
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Update(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Category updated Successfully";
+                return RedirectToAction("Index");
+                //if in diff controller
+                //return RedirectToAction("Index", another controller);
+            }
+            return View();
+        }
+
+        public IActionResult Delete2(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categoryFromDb = _db.Categories.Find(id);
+            //var categoryToDb = _db.Categories.FirstOrDefault(u=>u.Id==id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+
+            }
+            return View(categoryFromDb);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePOST2(int? id)
+
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var ObjCategory = _db.Categories.Find(id);
+            if (ObjCategory == null)
+            {
+                return NotFound();
+            }
+
+            _db.Categories.Remove(ObjCategory);
+            _db.SaveChanges();
+            TempData["success"] = "Category deleted Successfully";
+            return RedirectToAction("Index");
+            //if in diff controller
+            //return RedirectToAction("Index", another controller);
+        }
+
     }
-    
+
 }
