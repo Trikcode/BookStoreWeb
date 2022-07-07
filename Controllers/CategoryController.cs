@@ -39,6 +39,7 @@ namespace BookStoreWeb.Controllers
             {
             _db.Categories.Add(obj);
             _db.SaveChanges();
+                TempData["success"] = "Category Created Successfully";
             return RedirectToAction("Index");
             //if in diff controller
             //return RedirectToAction("Index", another controller);
@@ -76,6 +77,7 @@ namespace BookStoreWeb.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Category updated Successfully";
                 return RedirectToAction("Index");
                 //if in diff controller
                 //return RedirectToAction("Index", another controller);
@@ -101,24 +103,27 @@ namespace BookStoreWeb.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Category obj)
+        public IActionResult DeletePOST(int? id)
 
         {
-            if (obj.Name == obj.DisplayOrder.ToString())
+            if (id == null || id == 0)
             {
-                ModelState.AddModelError("CustomError", "The display order can't match the Name");
-                //ModelState.AddModelError("Name", "The display order can't match the Name");
+                return NotFound();
             }
-            if (ModelState.IsValid)
+            var ObjCategory = _db.Categories.Find(id);
+            if (ObjCategory == null)
             {
-                _db.Categories.Remove(obj);
+                return NotFound();
+            }
+
+                _db.Categories.Remove(ObjCategory);
                 _db.SaveChanges();
-                return RedirectToAction("Index");
+            TempData["success"] = "Category deleted Successfully";
+            return RedirectToAction("Index");
                 //if in diff controller
                 //return RedirectToAction("Index", another controller);
-            }
-            return View();
         }
+           
     }
     
 }

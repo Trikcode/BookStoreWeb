@@ -1,12 +1,12 @@
 ﻿@model Category
-@{
-    ViewData["Title"] = "Delete";
-}
+
+
 
 
 <div class="container-fluid">
     @*<div asp-validation-summary="All"></div>*@
-<form method="post">
+<form method="post" asp-action="DeletePost">
+    <input asp-for="Id" hidden/>
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary">Delete Category</h2>
@@ -15,17 +15,17 @@
         <div class="mb-3">
             <label asp-for="Name"></label>
             <input asp-for="Name" class="form-control"/>
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <span asp-validation-for="Name" disabled class="text-danger"></span>
         </div>
          <div class="mb-3">
             <label asp-for="DisplayOrder"></label>
             <input asp-for="DisplayOrder" class="form-control"/>
-             <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+             <span asp-validation-for="DisplayOrder"  disabled class="text-danger"></span>
         </div>
           <div class="mb-3">
             <label asp-for="Description"></label>
             <input asp-for="Description" class="form-control"/>
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <span asp-validation-for="Description"  disabled class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
 
